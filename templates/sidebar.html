@@ -1,0 +1,73 @@
+<div class="three columns">
+<div class="centered">
+	<img src="{{ SITEURL }}/theme/{{ AUTHOR_GRAVATAR }}" class="avatar">
+</div>
+
+<h4>Pages</h4>
+ <ul>
+  {% for title, link in MENUITEMS %}
+      <li><a href="{{ link }}">{{ title }}</a></li>
+  {% endfor %}
+  {% if DISPLAY_PAGES_ON_MENU %}
+    {% for p in PAGES %}
+      <li{% if p == page %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
+    {% endfor %}
+  {% else %}
+    {% if DISPLAY_CATEGORIES_ON_MENU %}
+      {% for cat, null in categories %}
+        <li{% if cat == category %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
+      {% endfor %}
+    {% endif %}
+  {% endif %}
+  </ul>
+
+<h4>Categories</h4>
+{% if categories %}
+<ul>
+	{% for cat, null in categories %}
+		<li><a href="{{ SITEURL }}/{{ cat.url|e }}">{{ cat }}</a></li>
+	{% endfor %}
+</ul>
+{% endif %}
+
+
+<h4>Tags</h4>
+{% if tags %}
+	<ul>
+	{% for tag in tag_cloud %}
+	    <li class="tag-{{ tag.1 }}"><a href="{{ SITEURL }}/{{ tag.0.url }}">{{ tag.0|e }}</a></li>
+	{% endfor %}
+</ul>
+{% endif %}
+
+
+{% if SOCIAL %}
+<div class= "social sidebarbg">
+	<nav class="widget">
+  <h4>Social</h4>
+  <ul>
+  {% for name, url in SOCIAL %}
+    <li><a target="_blank" href="{{ url|e }}">{{ name }}</a></li>
+  {% endfor %}
+  </ul>
+	</nav>
+</div>
+{% endif %}
+
+{% if LINKS %}
+<nav class="widget sidebarbg">
+  <h4>Links</h4>
+  <ul>
+  {% for name, url in LINKS %}
+	<li><a target="_blank" href="{{ url|e }}">{{ name }}</a></li>
+  {% endfor %}
+  </ul>
+</nav>
+{% endif %}
+
+<h4>Official Account</h4>
+<div class="centered">
+	<img src="{{ SITEURL }}/theme/{{ PERSONAL_WECHAT }}" class="wechat">
+</div>
+
+</div>
